@@ -98,7 +98,7 @@ def main():
     # Test con modo U-SURF (sin rotación)
     print("\n7. Comparando con U-SURF (modo upright)...")
     surf_upright = Surf(
-        hessian_thresh=0.004,
+        hessian_thresh=0.001,
         n_scales=4,
         upright=True
     )
