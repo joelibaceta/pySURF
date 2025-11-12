@@ -53,5 +53,12 @@ def box_sum(ii: np.ndarray, x: int, y: int, w: int, h: int) -> float:
     # Integral image indices are shifted by +1 due to padding
     x1, y1 = x, y
     x2, y2 = x + w, y + h
+    
+    # Clamp coordinates to valid bounds
+    h_max, w_max = ii.shape
+    x1 = max(0, min(x1, w_max - 1))
+    y1 = max(0, min(y1, h_max - 1))
+    x2 = max(0, min(x2, w_max - 1))
+    y2 = max(0, min(y2, h_max - 1))
 
     return ii[y2, x2] - ii[y1, x2] - ii[y2, x1] + ii[y1, x1]
