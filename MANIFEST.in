@@ -1,0 +1,9 @@
+include README.md
+include LICENSE
+include requirements.txt
+recursive-include examples *.py *.ipynb
+recursive-include images *.png *.jpg *.jpeg
+recursive-include pysurf *.py
+global-exclude __pycache__
+global-exclude *.py[cod]
+global-exclude .DS_Store
