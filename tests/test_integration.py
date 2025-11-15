@@ -4,7 +4,7 @@ Integration tests for the complete SURF pipeline.
 import numpy as np
 import pytest
 from pathlib import Path
-from pysurf import Surf
+from pysurf import PySurf
 
 # Obtener la ruta de la imagen de prueba
 IMAGE_PATH = Path(__file__).parent.parent / "images" / "image.png"
@@ -55,7 +55,7 @@ def test_surf_initialization():
     """
     Test que la clase Surf se inicializa correctamente con los parámetros por defecto.
     """
-    surf = Surf()
+    surf = PySurf()
     assert surf.hessian_thresh == 0.004
     assert surf.n_scales == 4
     assert surf.base_filter == 9
@@ -69,7 +69,7 @@ def test_surf_custom_parameters():
     """
     Test que la clase Surf acepta parámetros personalizados.
     """
-    surf = Surf(
+    surf = PySurf(
         hessian_thresh=0.001,
         n_scales=5,
         base_filter=12,
@@ -88,7 +88,7 @@ def test_surf_detect_synthetic(synthetic_image):
     """
     Test que SURF detecta keypoints en una imagen sintética.
     """
-    surf = Surf(hessian_thresh=0.001, n_scales=3)
+    surf = PySurf(hessian_thresh=0.001, n_scales=3)
     keypoints = surf.detect(synthetic_image)
     
     # Verificar que se detectaron algunos keypoints
@@ -109,7 +109,7 @@ def test_surf_describe_synthetic(synthetic_image):
     """
     Test que SURF genera descriptores válidos.
     """
-    surf = Surf(hessian_thresh=0.001, n_scales=3)
+    surf = PySurf(hessian_thresh=0.001, n_scales=3)
     keypoints = surf.detect(synthetic_image)
     
     if len(keypoints) == 0:
@@ -131,7 +131,7 @@ def test_surf_detect_and_describe_synthetic(synthetic_image):
     """
     Test del pipeline completo con detect_and_describe.
     """
-    surf = Surf(hessian_thresh=0.001, n_scales=3)
+    surf = PySurf(hessian_thresh=0.001, n_scales=3)
     keypoints, descriptors = surf.detect_and_describe(synthetic_image)
     
     # Verificar que se detectaron keypoints
@@ -146,7 +146,7 @@ def test_surf_upright_mode(synthetic_image):
     """
     Test que el modo U-SURF (upright) funciona correctamente.
     """
-    surf = Surf(hessian_thresh=0.001, n_scales=3, upright=True)
+    surf = PySurf(hessian_thresh=0.001, n_scales=3, upright=True)
     keypoints, descriptors = surf.detect_and_describe(synthetic_image)
     
     assert len(keypoints) > 0
@@ -163,7 +163,7 @@ def test_surf_with_real_image(test_image):
     """
     Test del pipeline completo con la imagen real (image.png).
     """
-    surf = Surf(
+    surf = PySurf(
         hessian_thresh=0.004,
         n_scales=4,
         base_filter=9,
@@ -194,7 +194,7 @@ def test_surf_empty_image():
     """
     # Imagen completamente negra
     empty_img = np.zeros((100, 100), dtype=np.float32)
-    surf = Surf(hessian_thresh=0.001)
+    surf = PySurf(hessian_thresh=0.001)
     
     keypoints, descriptors = surf.detect_and_describe(empty_img)
     
@@ -209,7 +209,7 @@ def test_surf_uniform_image():
     """
     # Imagen completamente blanca
     uniform_img = np.ones((100, 100), dtype=np.float32)
-    surf = Surf(hessian_thresh=0.001)
+    surf = PySurf(hessian_thresh=0.001)
     
     keypoints, descriptors = surf.detect_and_describe(uniform_img)
     
@@ -226,7 +226,7 @@ def test_surf_uint8_input():
     # Crear imagen en uint8
     img_uint8 = (np.random.rand(100, 100) * 255).astype(np.uint8)
     
-    surf = Surf(hessian_thresh=0.001, n_scales=3)
+    surf = PySurf(hessian_thresh=0.001, n_scales=3)
     keypoints, descriptors = surf.detect_and_describe(img_uint8)
     
     # Debería funcionar sin errores
@@ -239,8 +239,8 @@ def test_surf_different_thresholds(synthetic_image):
     """
     Test que diferentes thresholds producen diferentes cantidades de keypoints.
     """
-    surf_low = Surf(hessian_thresh=0.0001, n_scales=3)
-    surf_high = Surf(hessian_thresh=0.01, n_scales=3)
+    surf_low = PySurf(hessian_thresh=0.0001, n_scales=3)
+    surf_high = PySurf(hessian_thresh=0.01, n_scales=3)
     
     kps_low, _ = surf_low.detect_and_describe(synthetic_image)
     kps_high, _ = surf_high.detect_and_describe(synthetic_image)
@@ -253,7 +253,7 @@ def test_surf_descriptor_uniqueness(synthetic_image):
     """
     Test que los descriptores son razonablemente únicos.
     """
-    surf = Surf(hessian_thresh=0.001, n_scales=3)
+    surf = PySurf(hessian_thresh=0.001, n_scales=3)
     keypoints, descriptors = surf.detect_and_describe(synthetic_image)
     
     if len(keypoints) < 2:
@@ -271,7 +271,7 @@ def test_surf_reproducibility(synthetic_image):
     """
     Test que SURF produce resultados reproducibles con la misma imagen.
     """
-    surf = Surf(hessian_thresh=0.001, n_scales=3)
+    surf = PySurf(hessian_thresh=0.001, n_scales=3)
     
     kps1, desc1 = surf.detect_and_describe(synthetic_image)
     kps2, desc2 = surf.detect_and_describe(synthetic_image)

@@ -1,0 +1,72 @@
+Metadata-Version: 2.4
+Name: pysurf-detector
+Version: 0.2.0
+Summary: A pure Python implementation of SURF (Speeded-Up Robust Features)
+Author-email: Joel Ibaceta <joelibaceta@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/joelibaceta/pySURF
+Project-URL: Documentation, https://github.com/joelibaceta/pySURF/blob/main/README.md
+Project-URL: Repository, https://github.com/joelibaceta/pySURF
+Project-URL: Bug Tracker, https://github.com/joelibaceta/pySURF/issues
+Keywords: surf,computer-vision,feature-detection,keypoint-detection
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Image Recognition
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.20.0
+Requires-Dist: matplotlib>=3.3.0
+Requires-Dist: pillow>=8.0.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0.0; extra == "dev"
+Requires-Dist: pytest-cov>=3.0.0; extra == "dev"
+Requires-Dist: black>=22.0.0; extra == "dev"
+Requires-Dist: flake8>=4.0.0; extra == "dev"
+Provides-Extra: notebook
+Requires-Dist: jupyter>=1.0.0; extra == "notebook"
+Requires-Dist: ipykernel>=6.0.0; extra == "notebook"
+
+# pySURF
+
+Implementación de SURF (Speeded-Up Robust Features) en Python.
+
+## Instalación
+
+```bash
+# Crear y activar entorno virtual
+python3 -m venv env
+source env/bin/activate 
+
+# Instalar dependencias
+make install
+# o manualmente:
+pip install -r requirements.txt
+```
+
+## Tests
+
+El proyecto incluye un Makefile para facilitar la ejecución de tests:
+
+```bash
+# Ver todos los comandos disponibles
+make help
+
+# Ejecutar tests
+make test
+
+# Ejecutar tests con salida detallada
+make test-verbose
+
+# Ejecutar tests con cobertura (requiere pytest-cov)
+make test-coverage
+
+# Limpiar archivos generados
+make clean
+```

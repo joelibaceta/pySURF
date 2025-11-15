@@ -10,7 +10,7 @@ from pysurf.orientation import assign_orientations
 from pysurf.descriptor import compute_descriptor
 
 
-class Surf:
+class PySurf:
     """
     SURF feature detector and descriptor.
     
@@ -34,7 +34,7 @@ class Surf:
     
     Examples
     --------
-    >>> surf = Surf(hessian_thresh=0.004, n_scales=4, upright=False)
+    >>> surf = PySurf(hessian_thresh=0.004, n_scales=4, upright=False)
     >>> kps, desc = surf.detect_and_describe(img)
     """
     

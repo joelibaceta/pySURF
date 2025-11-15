@@ -2,8 +2,8 @@
 pySURF - SURF (Speeded-Up Robust Features) implementation in Python.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
-from pysurf.surf import Surf
+from pysurf.pysurf import PySurf
 
-__all__ = ['Surf', '__version__']
+__all__ = ['PySurf', '__version__']
